@@ -48,7 +48,7 @@ stages{
     //         echo "------------>Testing Protractor<------------"
     //         sh 'npm run e2e'
     //     }
-    //  }
+    // }
 
     stage('Static Code Analysis') {
       steps{
