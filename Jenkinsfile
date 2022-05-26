@@ -12,6 +12,10 @@ pipeline {
  	disableConcurrentBuilds()
   }
 
+  tools {
+    nodejs "NodeJS16"
+  }
+
 stages{
     stage('Checkout') {
       steps{
@@ -20,9 +24,9 @@ stages{
       }
     }
 
-     stage('nstall modules') {
+     stage('NPM install') {
       steps {
-        echo "------------>Install modules<------------"
+        echo "------------>Installing<------------"
         withEnv(['NPM_CONFIG_LOGLEVEL=warn']) {
           sh 'npm install'
         }
@@ -31,7 +35,7 @@ stages{
 
     stage('Test Unit') {
       steps {
-        echo "------------>Test<------------"
+        echo "------------>Testing<------------"
         //sh 'npm run test -- --watch=false --browsers ChromeHeadless'
         sh 'ng test --watch=false --browsers=ChromeHeadless'
         
@@ -61,7 +65,7 @@ stages{
   }
 
   }
-   post {
+post {
         failure {
             echo 'pipeline falló'
             mail(
