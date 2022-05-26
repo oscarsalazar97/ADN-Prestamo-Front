@@ -48,12 +48,20 @@ stages{
     //         sh 'npm run e2e'
     //     }
     // }
-    stage('Static Code Analysis') {
+    /* stage('Static Code Analysis') {
       steps{
 				sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:prestamos.front.oscar.salazar',
 				  sonarName:'"ADN-Prestamos-Front(oscar.salazar)"',
 				  sonarPathProperties:'./sonar-project.properties')
 			}
+    } */
+    stage('Static Code Analysis') {
+        steps{
+            echo '------------>Sonar scan and quality gate<------------'
+            withSonarQubeEnv('Sonar') {
+				sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
+			}
+        }
     }
 
     stage('Build') {
