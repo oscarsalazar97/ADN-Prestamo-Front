@@ -65,9 +65,7 @@ stages{
       }
     }
   }
-
-  }
-post {
+  post {
         failure {
             echo 'pipeline falló'
             mail(
@@ -79,4 +77,5 @@ post {
         success {
             echo 'This will run only if successful'
         }
+}
 }
