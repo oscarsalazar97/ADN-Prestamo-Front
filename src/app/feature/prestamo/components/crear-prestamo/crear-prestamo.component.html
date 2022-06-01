@@ -1,0 +1,53 @@
+<h1>Registrar préstamo</h1>
+<form [formGroup]= "prestamoForm" (ngSubmit)="crear()">
+    <div class="row">
+      <div class="col-4">
+        <div class="mb-3">
+          <label class="form-label">Cliente</label>
+          <input validar type="number" id="idCliente" name="idCliente" placeholder="Id cliente"
+          class="form-control" formControlName="idCliente">
+        </div>
+      </div>
+
+      <div class="col-5">
+        <div class="mb-3">
+          <label class="form-label">Monto</label>
+          <input validar type="number" id="monto" name="monto" placeholder="Monto"
+          class="form-control" formControlName="monto">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4">
+        <label class="form-label">Forma de pago</label>
+        <select validar formControlName="formaPago" id="formaPago" name="formaPago" class="form-select-sm">
+          <option value="SEMANAL">Semanal</option>
+          <option value="QUINCENAL">Quincenal</option>
+        </select>
+      </div>
+
+      <div class="col-5">
+        <label class="form-label">Cantidad cuotas</label>
+        <select validar formControlName="cantidadCuotas" id="cantidadCuotas" name="cantidadCuotas" class="form-select-sm">
+          <option value="2">2 cuotas</option>
+          <option value="3">3 cuotas</option>
+          <option value="4">4 cuotas</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-9">
+        <div class="mb-3">
+          <label class="form-label">Porcentaje de interés</label>
+          <input validar type="number" id="porcentajeInteres" name="porcentajeInteres" placeholder="Porcentaje interés"
+          class="form-control" formControlName="porcentajeInteres">
+        </div>
+     
+      </div>
+    </div>
+    
+   
+    <button [disabled]="prestamoForm.invalid" type="submit" class="btn btn-primary">Submit</button>
+  </form>

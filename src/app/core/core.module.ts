@@ -10,14 +10,15 @@ import { HttpService } from './services/http.service';
 import { ManejadorError } from './interceptor/manejador-error';
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
-  declarations: [ToolbarComponent, NavbarComponent, FooterComponent],
+  declarations: [ToolbarComponent, NavbarComponent, FooterComponent, HeaderComponent],
   imports: [
     CommonModule,
     RouterModule
   ],
-  exports: [ToolbarComponent, NavbarComponent],
+  exports: [ToolbarComponent, NavbarComponent, HeaderComponent, FooterComponent],
   providers: [
     HttpService,
     SecurityGuard,
