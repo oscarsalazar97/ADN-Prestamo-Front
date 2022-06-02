@@ -1,0 +1,15 @@
+div {
+    -webkit-box-shadow: 2px 2px 10px 2px #000000; 
+    box-shadow: 2px 2px 10px 2px #000000;
+}
+
+@media screen and (max-width: 480px) {
+   .ocultar{
+       display: none;
+   }
+
+   em {
+     display: flex;
+     justify-content: center;
+   }
+}

@@ -4,7 +4,6 @@
   </div>
   <div>
     <span><p>TRM Dólar</p></span>
-    <p>4.300</p>
-  </div>     
-    
+    <p *ngIf="trm">{{trm.trm | currency}}</p>
+  </div>       
 </header>

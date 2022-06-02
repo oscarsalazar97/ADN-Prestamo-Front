@@ -1,4 +1,3 @@
-import { Respuesta } from './../../shared/model/respuesta';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PrestamoService } from './../../shared/service/prestamo.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -10,15 +9,25 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { of } from 'rxjs';
 import { PrestamoRespuesta } from '@prestamo/shared/model/prestamo-respuesta';
+//import { Router, Routes } from '@angular/router';
+import { Respuesta } from './../../shared/model/respuesta';
+import { CrearPrestamo } from '@prestamo/shared/model/crear-prestamo';
+
 
 describe('CrearPrestamoComponent', () => {
   let component: CrearPrestamoComponent;
   let fixture: ComponentFixture<CrearPrestamoComponent>;
   let prestamoService: PrestamoService;
+  //let router : Router;
+  //let location: Location;
 
-  const prestamo = new PrestamoRespuesta({ fechaCredito: "2022-06-01", fechaVencimiento: "2022-06-15", monto: 120000, saldo: 144000, cantidadCuotas: 2, formaPago: "SEMANAL", fechaCuota: "2022-06-08", valorCuota: 72000 });
+  const prestamoCrear = new CrearPrestamo("3", 120000, 20, 2, "SEMANAL");
+  const prestamo = new PrestamoRespuesta("2022-06-01", "2022-06-15", 120000.0, 144000.0, 2,"SEMANAL",  "2022-06-08", 72000.0);
   const respuestaPrestamo = new Respuesta(prestamo);
-
+  /* const routes: Routes = [
+    { path: 'prestamo', loadChildren: () => import('@prestamo/prestamo.module').then(mod => mod.PrestamoModule) }
+    
+  ]; */
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ CrearPrestamoComponent ],
@@ -39,6 +48,8 @@ describe('CrearPrestamoComponent', () => {
     fixture = TestBed.createComponent(CrearPrestamoComponent);
     component = fixture.componentInstance;
     prestamoService = TestBed.inject(PrestamoService);
+    //router = TestBed.inject(Router);
+   // location = TestBed.inject(Location);
     spyOn(prestamoService, 'crear').and.returnValue(
       of(respuestaPrestamo)
     );
@@ -50,12 +61,13 @@ describe('CrearPrestamoComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('deberia crear prestamo', () => {
-    component.crear();
-    expect(spyOn(prestamoService, 'crear').calls.count()).toBe(1);
-    
+  it('formulario es invalido cuando esta vacio', () => {
+    expect(component.prestamoForm.valid).toBeFalsy();
+  });
 
-    // Aca validamos el resultado esperado al enviar la petición
-    // TODO adicionar expect
+  it('deberia crear prestamo', () => {
+    prestamoService.crear(prestamoCrear).subscribe((resp: Respuesta)=> {
+      expect(resp.valor).toBe(prestamo);
+    });
   });
 });

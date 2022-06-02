@@ -1,20 +1,28 @@
-<table aria-describedby="Prestamos">
+<div>
+  <table aria-describedby="Prestamos" class="table">
     <thead>
       <tr>
         <th scope="col-1">#</th>
         <th scope="col-2">Id Cliente</th>
+        <th scope="col-2" class="ocultar">Nombre Cliente</th>
         <th scope="col-2">Monto</th>
         <th scope="col-2">Saldo</th>
+        <th scope="col-2" class="ocultar">Forma pago</th>
+        <th scope="col-2" class="ocultar">Estado</th>
         <th scope="col-3">Acción</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let prestamo of prestamos | async">
-        <td class="col-1">{{prestamo.id}}</td>
-        <td class="col-2">{{prestamo.idCliente}}</td>
-        <td class="col-2">{{prestamo.monto}}</td>
-        <td class="col-2">{{prestamo.saldo}}</td>
-        <th scope="col-3">Acción</th>
+      <tr id="prestamos" class="prestamos" *ngFor="let prestamo of prestamos | async">
+        <td class="col-1" id="prestamo-id">{{prestamo.id}}</td>
+        <td class="col-1">{{prestamo.idCliente}}</td>
+        <td class="col-2" class="ocultar">{{prestamo.nombreCliente}}</td>
+        <td class="col-2">{{prestamo.monto | currency}}</td>
+        <td class="col-2">{{prestamo.saldo | currency}}</td>
+        <td class="col-2" class="ocultar">{{prestamo.formaPago}}</td>
+        <td class="col-2" class="ocultar">{{prestamo.estadoPrestamo}}</td>
+        <th scope="col-3"><em class="bi bi-paypal"></em></th>
       </tr>
     </tbody>
-  </table>
+</table>
+</div>

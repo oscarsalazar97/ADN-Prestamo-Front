@@ -1,11 +1,13 @@
 :host{
   margin-top: auto;
-    
+  -webkit-box-shadow: 2px 2px 10px 2px #000000; 
+  box-shadow: 2px 2px 10px 2px #000000;
 }
 
 footer {
     text-align: center;
     padding: 3px;
-    background-color: DarkSalmon;
-    color: white;
+    background: rgb(2,0,36);
+    background: linear-gradient(329deg, rgba(2,0,36,1) 0%, rgba(142,142,233,1) 31%, rgba(0,212,255,1) 100%);
+    color:whitesmoke;    
   }

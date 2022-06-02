@@ -54,7 +54,7 @@ describe('PrestamoService', () => {
   it('deberia crear prestamo', () => {
     const prestamo = new CrearPrestamo("3", 120000, 20, 2, "SEMANAL");
    
-    const dummyPrestamo = new PrestamoRespuesta({ fechaCredito: "2022-06-01", fechaVencimiento: "2022-06-15", monto: 120000, saldo: 144000, cantidadCuotas: 2, formaPago: "SEMANAL", fechaCuota: "2022-06-08", valorCuota: 72000 });
+    const dummyPrestamo = new PrestamoRespuesta("2022-06-01", "2022-06-15", 120000.0, 144000.0, 2,"SEMANAL",  "2022-06-08", 72000.0);
     const dummyRespuesta = new Respuesta(dummyPrestamo);
     service.crear(prestamo).subscribe(prestamoResp => {
       expect(prestamoResp).toEqual(dummyRespuesta);

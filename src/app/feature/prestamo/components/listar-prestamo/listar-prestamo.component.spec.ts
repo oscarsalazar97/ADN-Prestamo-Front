@@ -38,13 +38,14 @@ describe('ListarPrestamoComponent', () => {
     fixture.detectChanges();
   });
 
+  it('should be created', () =>{
+    expect(component).toBeTruthy();
+  });
 
   it('deberia crear lista con 1 prestamo', () => {
-    expect(component).toBeTruthy();
     component.prestamos.subscribe(resultado => {
-      expect(1).toBe(resultado.length);
-      expect(spyOn(prestamoService, 'consultar').calls.count()).toBe(1);
-      
+      expect(1).toBe(resultado.length);      
+      expect(listaPrestamos).toBe(resultado);
   });
   });
 });

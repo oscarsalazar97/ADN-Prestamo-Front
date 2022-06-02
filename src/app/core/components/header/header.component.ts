@@ -1,4 +1,6 @@
+import { Trm } from './../../../shared/model/trm';
 import { Component, OnInit } from '@angular/core';
+import { TrmService } from '@shared/service/trm.service';
 
 @Component({
   selector: 'app-header',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor() { }
+  trm: Trm;
+  constructor(protected trmService:TrmService) { }
 
   ngOnInit(): void {
+    this.trmService.consultar().subscribe((trm: Trm)=> {
+      this.trm = trm;
+    });
   }
 
 }
