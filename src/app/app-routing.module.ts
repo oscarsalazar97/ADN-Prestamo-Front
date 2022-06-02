@@ -7,7 +7,6 @@ import { HomeComponent } from '@home/home.component';
 const routes: Routes = [
   { path: '', redirectTo: '/prestamo', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [SecurityGuard]  },
-  { path: 'producto', loadChildren: () => import('@producto/producto.module').then(mod => mod.ProductoModule) },
   { path: 'prestamo', loadChildren: () => import('@prestamo/prestamo.module').then(mod => mod.PrestamoModule) }
   
 ];
