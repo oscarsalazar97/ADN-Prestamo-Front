@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./listar-prestamo.component.css']
 })
 export class ListarPrestamoComponent implements OnInit {
-  public prestamos: Observable<Prestamo[]>
+  public prestamos: Observable<Prestamo[]>;
 
   constructor(protected prestamoService: PrestamoService) {
     

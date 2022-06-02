@@ -10,15 +10,13 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { of } from 'rxjs';
 import { PrestamoRespuesta } from '@prestamo/shared/model/prestamo-respuesta';
-import { CrearPrestamo } from '@prestamo/shared/model/crear-prestamo';
 
 describe('CrearPrestamoComponent', () => {
   let component: CrearPrestamoComponent;
   let fixture: ComponentFixture<CrearPrestamoComponent>;
   let prestamoService: PrestamoService;
 
-  const prestamo = new PrestamoRespuesta("2022-06-01", "2022-06-15", 120000.0, 144000.0, 2,"SEMANAL",  "2022-06-08", 72000.0);
-  const prestamoCrear = new CrearPrestamo("3", 120000, 20, 2, "SEMANAL");
+  const prestamo = new PrestamoRespuesta({ fechaCredito: "2022-06-01", fechaVencimiento: "2022-06-15", monto: 120000, saldo: 144000, cantidadCuotas: 2, formaPago: "SEMANAL", fechaCuota: "2022-06-08", valorCuota: 72000 });
   const respuestaPrestamo = new Respuesta(prestamo);
 
   beforeEach(async () => {
@@ -53,10 +51,10 @@ describe('CrearPrestamoComponent', () => {
   });
 
   it('deberia crear prestamo', () => {
-    prestamoService.crear(prestamoCrear).subscribe(resp => {
-      expect(resp).toBe(respuestaPrestamo)
-    });
-   
+    component.crear();
+    expect(spyOn(prestamoService, 'crear').calls.count()).toBe(1);
+    
+
     // Aca validamos el resultado esperado al enviar la petición
     // TODO adicionar expect
   });

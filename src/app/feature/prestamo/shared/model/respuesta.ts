@@ -1,4 +1,4 @@
-import { PrestamoRespuesta } from "./prestamo-respuesta";
+import { PrestamoRespuesta } from './prestamo-respuesta';
 
 export class Respuesta {
     valor: PrestamoRespuesta;
