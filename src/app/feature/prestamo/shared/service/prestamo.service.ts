@@ -3,6 +3,7 @@ import { HttpService } from '@core/services/http.service';
 import { environment } from 'src/environments/environment';
 import { CrearPrestamo } from '../model/crear-prestamo';
 import { Prestamo } from '../model/prestamo';
+import { Respuesta } from '../model/respuesta';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +17,7 @@ export class PrestamoService {
   }
 
   public crear(prestamo: CrearPrestamo) {
-    console.log("SERVICE");
-    console.log(prestamo);
-    return this.http.doPost<CrearPrestamo, Prestamo>(`${environment.endpoint}/prestamo`, prestamo,
+    return this.http.doPost<CrearPrestamo, Respuesta>(`${environment.endpoint}/prestamo`, prestamo,
     this.http.optsName('crear prestamo'));    
   }
 }

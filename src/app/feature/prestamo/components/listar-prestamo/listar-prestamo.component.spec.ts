@@ -1,21 +1,27 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { ListarPrestamoComponent } from './listar-prestamo.component';
 import { Prestamo } from './../../shared/model/prestamo';
-import { cold } from 'jasmine-marbles';
+import { of } from 'rxjs';
+import { HttpService } from 'src/app/core/services/http.service';
+import { PrestamoService } from './../../shared/service/prestamo.service';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 describe('ListarPrestamoComponent', () => {
   let component: ListarPrestamoComponent;
   let fixture: ComponentFixture<ListarPrestamoComponent>;
-  let store: MockStore;
+  let prestamoService: PrestamoService;
   const listaPrestamos: Prestamo[] = [new Prestamo('1', '3', 'Cliente 1', 120000, 140000, 'SEMANAL', 'ACTIVO')];
-  const initialState = { data: [] };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ListarPrestamoComponent ],
+      imports:[
+        CommonModule,
+        HttpClientModule
+      ],
       providers: [
-        provideMockStore({initialState})
+        PrestamoService, HttpService
       ]  
     })
     .compileComponents();
@@ -24,22 +30,21 @@ describe('ListarPrestamoComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ListarPrestamoComponent);
-    store = TestBed.inject(MockStore);
     component = fixture.componentInstance;
+    prestamoService = TestBed.inject(PrestamoService);
+    spyOn(prestamoService, 'consultar').and.returnValue(
+      of(listaPrestamos)
+    );
     fixture.detectChanges();
   });
 
 
-  it('should create', () => {
+  it('deberia crear lista con 1 prestamo', () => {
     expect(component).toBeTruthy();
+    component.prestamos.subscribe(resultado => {
+      expect(1).toBe(resultado.length);
+      expect(spyOn(prestamoService, 'consultar').calls.count()).toBe(1);
+      
   });
-
-  it('con elementos en la lista de prestamo', () => {
-    let consultarPrestamosExito = '[Prestamo Component] Consultar prestamos';
-    store.setState({type: consultarPrestamosExito, data: listaPrestamos});
-
-    const expected = cold('(prestamo|)', { prestamo: listaPrestamos });    
-
-    expect(store.select((state) => state.prestamo)).toBeObservable(expected);
   });
 });

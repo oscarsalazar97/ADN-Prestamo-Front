@@ -1,5 +1,5 @@
 export class Prestamo {
-    id: string;
+    id?: string;
     idCliente?: string;
     nombreCliente?: string;
     monto?: number;

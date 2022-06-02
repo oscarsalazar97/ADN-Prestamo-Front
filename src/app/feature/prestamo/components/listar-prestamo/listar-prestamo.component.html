@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let prestamo of prestamos">
+      <tr *ngFor="let prestamo of prestamos | async">
         <td class="col-1">{{prestamo.id}}</td>
         <td class="col-2">{{prestamo.idCliente}}</td>
         <td class="col-2">{{prestamo.monto}}</td>

@@ -1,8 +1,7 @@
-import { consultarPrestamos } from './../../shared/redux/prestamo.action';
+import { PrestamoService } from './../../shared/service/prestamo.service';
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Prestamo } from '@prestamo/shared/model/prestamo';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-listar-prestamo',
@@ -10,25 +9,13 @@ import { Observable, Subscription } from 'rxjs';
   styleUrls: ['./listar-prestamo.component.css']
 })
 export class ListarPrestamoComponent implements OnInit {
-  prestamos$: Observable<Prestamo[]>
-  prestamos!: Prestamo[];
-  subscription: Subscription;
+  public prestamos: Observable<Prestamo[]>
 
-  constructor(private store: Store<{prestamo: any}>) {
-    this.prestamos$ = this.store.select((state) => state.prestamo);
+  constructor(protected prestamoService: PrestamoService) {
+    
    }
 
   ngOnInit(): void {
-    this.store.dispatch({type: consultarPrestamos});
-    this.subscription = this.prestamos$.subscribe((data: Prestamo[]) => {
-      this.prestamos = data;
-    });
+   this.prestamos = this.prestamoService.consultar();
   }
-
-  ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
-    this.subscription.unsubscribe();
-  }
-
 }

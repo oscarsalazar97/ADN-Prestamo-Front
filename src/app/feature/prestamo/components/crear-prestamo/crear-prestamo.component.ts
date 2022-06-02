@@ -1,7 +1,6 @@
-import { crearPrestamo } from './../../shared/redux/prestamo.action';
+import { PrestamoService } from './../../shared/service/prestamo.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,8 +10,7 @@ import { Router } from '@angular/router';
 })
 export class CrearPrestamoComponent implements OnInit {
   prestamoForm: FormGroup;
-  constructor(private store: Store<{prestamo: any}>, private router: Router) {
-
+  constructor(protected prestamoService: PrestamoService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -20,11 +18,12 @@ export class CrearPrestamoComponent implements OnInit {
   }
 
   crear() {
-    console.log(this.prestamoForm.value);
-    this.store.dispatch({type: crearPrestamo, prestamo: this.prestamoForm.value });
-    this.prestamoForm.reset();
-    this.router.navigate(['/prestamo/listar']);
-  }
+    this.prestamoService.crear(this.prestamoForm.value).subscribe(resp=> {
+      console.log(resp)
+      this.router.navigate(['/prestamo/listar']);
+
+    });
+   }
 
   private construirFormularioPrestamo() {
     this.prestamoForm = new FormGroup({

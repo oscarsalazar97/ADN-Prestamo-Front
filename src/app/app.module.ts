@@ -8,12 +8,6 @@ import { ProductoModule } from '@producto/producto.module';
 import { CoreModule } from '@core/core.module';
 import { CookieService } from 'ngx-cookie-service';
 import { PrestamoModule } from './feature/prestamo/prestamo.module';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { PrestamoEffects } from '@prestamo/shared/redux/prestamo.effects';
-import { prestamoReducer } from '@prestamo/shared/redux/prestamo.reduce';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,14 +18,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     AppRoutingModule,
     ProductoModule,
     CoreModule,
-    PrestamoModule,
-    StoreModule.forRoot({prestamo: prestamoReducer}),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-      logOnly: true,
-      autoPause: true, // Pauses recording actions and state changes when the extension window is not open
-    }),
-    EffectsModule.forRoot([PrestamoEffects]),
+    PrestamoModule
   ],
   providers: [CookieService],
     bootstrap: [AppComponent],
