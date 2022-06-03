@@ -21,7 +21,7 @@
         <td class="col-2">{{prestamo.saldo | currency}}</td>
         <td class="col-2" class="ocultar">{{prestamo.formaPago}}</td>
         <td class="col-2" class="ocultar">{{prestamo.estadoPrestamo}}</td>
-        <th scope="col-3"><em class="bi bi-paypal"></em></th>
+        <th scope="col-3"><span *ngIf="prestamo.estadoPrestamo === 'ACTIVO'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Abonar"><em class="bi bi-paypal" (click)="abonar(prestamo.id)"></em></span></th>
       </tr>
     </tbody>
 </table>

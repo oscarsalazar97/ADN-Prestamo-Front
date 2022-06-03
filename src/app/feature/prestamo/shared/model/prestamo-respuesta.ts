@@ -9,7 +9,7 @@ export class PrestamoRespuesta {
     valorCuota?: number;
 
     constructor(fechaCredito: string, fechaVencimiento: string, monto: number, saldo: number, cantidadCuotas: number,
-         formaPago: string, fechaCuota: string, valorCuota: number) {
+         formaPago: string, fechaCuota: string) {
             this.fechaCredito = fechaCredito;
             this.fechaVencimiento = fechaVencimiento;
             this.monto = monto;
@@ -17,6 +17,6 @@ export class PrestamoRespuesta {
             this.cantidadCuotas = cantidadCuotas;
             this.formaPago = formaPago;
             this.fechaCuota = fechaCuota;
-            this.valorCuota = valorCuota;
+            this.valorCuota = saldo / cantidadCuotas;
     }
 }

@@ -7,9 +7,13 @@ div {
    .ocultar{
        display: none;
    }
+}
 
-   em {
-     display: flex;
-     justify-content: center;
-   }
+em {
+  display: flex;
+  justify-content: center;
+}
+
+em:hover{
+  cursor: pointer;
 }

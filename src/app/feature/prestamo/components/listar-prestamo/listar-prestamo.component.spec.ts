@@ -6,6 +6,9 @@ import { HttpService } from 'src/app/core/services/http.service';
 import { PrestamoService } from './../../shared/service/prestamo.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { PrestamoRespuesta } from '@prestamo/shared/model/prestamo-respuesta';
+import { Abono } from '@prestamo/shared/model/abono';
+import { Respuesta } from '@prestamo/shared/model/respuesta';
 
 describe('ListarPrestamoComponent', () => {
   let component: ListarPrestamoComponent;
@@ -48,4 +51,18 @@ describe('ListarPrestamoComponent', () => {
       expect(listaPrestamos).toBe(resultado);
   });
   });
+
+  it('deberia crear Abono', () => {
+    const dummyPrestamo = new PrestamoRespuesta("2022-06-01", "2022-06-15", 120000.0, 144000.0, 2,"SEMANAL",  "2022-06-08");
+    const dummyAbonoResponse = new Abono(1, null, dummyPrestamo, "2022-06-02", 72000.0, 0.0);
+    const dummyRespuesta = new Respuesta(dummyAbonoResponse);
+    spyOn(prestamoService, 'abonar').and.returnValue(
+      of(dummyRespuesta)
+    );
+
+    component.abonar(3);
+    expect(component.abono).toBe(dummyRespuesta.valor);
+
+  });
+
 });

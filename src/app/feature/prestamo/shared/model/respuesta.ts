@@ -1,9 +1,7 @@
-import { PrestamoRespuesta } from './prestamo-respuesta';
+export class Respuesta<T> {
+    valor: T;
 
-export class Respuesta {
-    valor: PrestamoRespuesta;
-
-    constructor(prestamo: PrestamoRespuesta) {
-       this.valor = prestamo;
+    constructor(valor: T) {
+       this.valor = valor;
     }
 }

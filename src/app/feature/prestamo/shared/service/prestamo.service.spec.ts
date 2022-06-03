@@ -1,3 +1,4 @@
+import { Abono } from './../model/abono';
 import { Respuesta } from './../model/respuesta';
 import { PrestamoRespuesta } from './../model/prestamo-respuesta';
 import { CrearPrestamo } from './../model/crear-prestamo';
@@ -14,6 +15,7 @@ describe('PrestamoService', () => {
   let service: PrestamoService;
   const apiEndpointPrestamosLista = `${environment.endpoint}/prestamos`;
   const apiEndpointPrestamo = `${environment.endpoint}/prestamo`;
+  const apiEndpointAbono = `${environment.endpoint}/abono`;
 
   beforeEach(() => {
     const injector = TestBed.configureTestingModule({
@@ -54,7 +56,7 @@ describe('PrestamoService', () => {
   it('deberia crear prestamo', () => {
     const prestamo = new CrearPrestamo("3", 120000, 20, 2, "SEMANAL");
    
-    const dummyPrestamo = new PrestamoRespuesta("2022-06-01", "2022-06-15", 120000.0, 144000.0, 2,"SEMANAL",  "2022-06-08", 72000.0);
+    const dummyPrestamo = new PrestamoRespuesta("2022-06-01", "2022-06-15", 120000.0, 144000.0, 2,"SEMANAL",  "2022-06-08");
     const dummyRespuesta = new Respuesta(dummyPrestamo);
     service.crear(prestamo).subscribe(prestamoResp => {
       expect(prestamoResp).toEqual(dummyRespuesta);
@@ -62,6 +64,22 @@ describe('PrestamoService', () => {
     });
    
     const req = httpMock.expectOne(apiEndpointPrestamo);
+    expect(req.request.method).toBe('POST');
+    req.flush(dummyRespuesta);
+
+  });
+
+  it('deberia crear Abono', () => {
+    const dummyPrestamo = new PrestamoRespuesta("2022-06-01", "2022-06-15", 120000.0, 144000.0, 2,"SEMANAL",  "2022-06-08");
+    const dummyAbonoResponse = new Abono(1, null, dummyPrestamo, "2022-06-02", 72000.0, 0.0);
+    const dummyAbono = new Abono(1, 3, dummyPrestamo, "2022-06-02", 72000.0, 0.0);
+    const dummyRespuesta = new Respuesta(dummyAbonoResponse);
+    service.abonar(dummyAbono).subscribe(abonoResp => {
+      expect(abonoResp).toEqual(dummyRespuesta);
+
+    });
+   
+    const req = httpMock.expectOne(apiEndpointAbono);
     expect(req.request.method).toBe('POST');
     req.flush(dummyRespuesta);
 
