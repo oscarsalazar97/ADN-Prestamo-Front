@@ -1,6 +1,6 @@
 <h1>Registrar préstamo</h1>
 <div>
-  <form [formGroup]= "prestamoForm" (ngSubmit)="crear()">
+  <form [formGroup]= "prestamoForm" id="formCrearPrestamo" (ngSubmit)="crear()">
     <div class="row">
       <div class="col-4">
         <div class="mb-3">
@@ -50,7 +50,7 @@
     </div>
     
    <div class="row">
-    <button [disabled]="prestamoForm.invalid" type="submit" class="btn btn-primary">Crear</button>
+    <button id="crearPrestamo" name="crearPrestamo" [disabled]="prestamoForm.invalid" type="submit" class="btn btn-primary">Crear</button>
    </div>
   </form>
 </div>

@@ -9,6 +9,8 @@ export class PrestamoPage {
     private selectCantidadCuotas = element(by.id('cantidadCuotas'));
     private inputPorcentajeInteres = element(by.id('porcentajeInteres'));
     private listaPrestamos = element.all(by.css('.prestamos'));
+    private formularioCrearPrestamo = element(by.id('formCrearPrestamo'));
+    private botonAbonar = element(by.id('abonar'));
 
     async clickBotonCrearPrestamo() {
         await this.linkCrearPrestamo.click();
@@ -21,10 +23,6 @@ export class PrestamoPage {
     async contarPrestamos() {        
         return this.listaPrestamos.count();
      }
-
-     async prestamos() {        
-        return (await this.listaPrestamos).entries;
-    }
 
     async ingresarIdCliente(idCliente) {
         await this.inputIdCliente.sendKeys(idCliente);
@@ -44,5 +42,13 @@ export class PrestamoPage {
 
     async ingresarPorcentajeInteres(porcentajeInteres) {
         await this.inputPorcentajeInteres.sendKeys(porcentajeInteres);
+    }
+
+    async formCrearPrestamo() {
+        await this.formularioCrearPrestamo.submit();
+    }
+
+    async clickBotonAbonarPrestamo() {
+        await this.botonAbonar.click();
     }
 }

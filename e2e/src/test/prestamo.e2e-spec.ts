@@ -18,6 +18,39 @@ describe('workspace-project Prestamo', () => {
         expect(3).toBe(prestamo.contarPrestamos());
     });
 
+    it('Deberia crear prestamo', () => {
+      const ID_CLIENTE = 3;
+      const MONTO = 120000;
+      const CANTIDAD_CUOTAS = 2;
+      const FORMA_PAGO = "SEMANAL";
+      const PORCENTAJE_INTERES = 20.0;
+
+      page.navigateTo();
+      prestamo.clickBotonCrearPrestamo();
+      prestamo.ingresarIdCliente(ID_CLIENTE);
+      prestamo.ingresarMonto(MONTO);
+      prestamo.ingresarCantidadCuotas(CANTIDAD_CUOTAS);
+      prestamo.ingresarFormaPago(FORMA_PAGO);
+      prestamo.ingresarPorcentajeInteres(PORCENTAJE_INTERES);
+      prestamo.formCrearPrestamo();
+
+      expect(4).toBe(prestamo.contarPrestamos());
+      // Adicionamos las validaciones despues de la creación
+      // expect(<>).toEqual(<>);
+  });
+
+  it('Deberia abonar', () => {
+    
+    page.navigateTo();
+    prestamo.clickBotonListarPrestamos();      
+    prestamo.clickBotonAbonarPrestamo();
+    
+
+    expect(4).toBe(prestamo.contarPrestamos());
+    // Adicionamos las validaciones despues de la creación
+    // expect(<>).toEqual(<>);
+});
+
     afterEach(async () => {
         // Assert that there are no errors emitted from the browser
         const logs = await browser.manage().logs().get(logging.Type.BROWSER);
