@@ -43,12 +43,13 @@ describe('workspace-project Prestamo', () => {
     
     page.navigateTo();
     prestamo.clickBotonListarPrestamos();      
+    const saldoAnterior = prestamo.verSaldoPrestamo();    
     prestamo.clickBotonAbonarPrestamo();
-    
+    const saldoNuevo = prestamo.verSaldoPrestamo();
 
+    expect(saldoAnterior).toEqual("$144,000.00");
+    expect(saldoNuevo).toEqual("$72,000.00");
     expect(4).toBe(prestamo.contarPrestamos());
-    // Adicionamos las validaciones despues de la creación
-    // expect(<>).toEqual(<>);
 });
 
     afterEach(async () => {

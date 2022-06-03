@@ -10,7 +10,8 @@ export class PrestamoPage {
     private inputPorcentajeInteres = element(by.id('porcentajeInteres'));
     private listaPrestamos = element.all(by.css('.prestamos'));
     private formularioCrearPrestamo = element(by.id('formCrearPrestamo'));
-    private botonAbonar = element(by.id('abonar'));
+    private botonAbonar = element(by.id('abonar_3'));
+    private saldoPrestamo = element(by.id('saldo_3'));
 
     async clickBotonCrearPrestamo() {
         await this.linkCrearPrestamo.click();
@@ -50,5 +51,9 @@ export class PrestamoPage {
 
     async clickBotonAbonarPrestamo() {
         await this.botonAbonar.click();
+    }
+
+    async verSaldoPrestamo() {
+        return this.saldoPrestamo.getText() as Promise<string>;
     }
 }

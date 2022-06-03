@@ -14,14 +14,14 @@
     </thead>
     <tbody>
       <tr id="prestamos" class="prestamos" *ngFor="let prestamo of prestamos | async">
-        <td class="col-1" id="prestamo-id">{{prestamo.id}}</td>
+        <td class="col-1" [id]="'prestamo_'+prestamo.id">{{prestamo.id}}</td>
         <td class="col-1">{{prestamo.idCliente}}</td>
         <td class="col-2" class="ocultar">{{prestamo.nombreCliente}}</td>
         <td class="col-2">{{prestamo.monto | currency}}</td>
-        <td class="col-2">{{prestamo.saldo | currency}}</td>
+        <td class="col-2" [id]="'saldo_'+prestamo.id">{{prestamo.saldo | currency}}</td>
         <td class="col-2" class="ocultar">{{prestamo.formaPago}}</td>
         <td class="col-2" class="ocultar">{{prestamo.estadoPrestamo}}</td>
-        <th scope="col-3"><span *ngIf="prestamo.estadoPrestamo === 'ACTIVO'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Abonar"><em id="abonar" class="bi bi-paypal" (click)="abonar(prestamo.id)"></em></span></th>
+        <th scope="col-3"><span *ngIf="prestamo.estadoPrestamo === 'ACTIVO'" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Abonar"><em [id]="'abonar_'+ prestamo.id" class="bi bi-paypal" (click)="abonar(prestamo.id)"></em></span></th>
       </tr>
     </tbody>
 </table>
