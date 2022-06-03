@@ -94,7 +94,7 @@ export class MensajeErrorCamposDirective implements OnInit, OnDestroy, AfterView
   }
 
   ngAfterViewChecked(): void {
-    this.validarErrores();
+    //this.validarErrores();
   }
 
   ngOnDestroy(): void {

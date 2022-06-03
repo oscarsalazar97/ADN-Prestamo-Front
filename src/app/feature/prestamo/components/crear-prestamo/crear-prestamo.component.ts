@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Respuesta } from '@prestamo/shared/model/respuesta';
+import { error, prue } from '@shared/utils/alert';
 import { PrestamoRespuesta } from './../../shared/model/prestamo-respuesta';
 import { PrestamoService } from './../../shared/service/prestamo.service';
 
@@ -30,7 +31,12 @@ export class CrearPrestamoComponent implements OnInit {
     this.prestamoService.crear(this.prestamoForm.value).subscribe((resp: Respuesta<PrestamoRespuesta>)=> {
       this.prestamoRespuesta = resp.valor;
       this.router.navigate(['/prestamo/listar']);
-    });
+      prue();
+    }, (errorO => {
+      console.log(errorO);
+      
+      error(errorO.error.mensaje);
+    }));
    }
 
   private construirFormularioPrestamo() {
