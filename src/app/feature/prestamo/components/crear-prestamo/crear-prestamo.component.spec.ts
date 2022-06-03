@@ -9,7 +9,6 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { of } from 'rxjs';
 import { PrestamoRespuesta } from '@prestamo/shared/model/prestamo-respuesta';
-//import { Router, Routes } from '@angular/router';
 import { Respuesta } from './../../shared/model/respuesta';
 import { CrearPrestamo } from '@prestamo/shared/model/crear-prestamo';
 
@@ -18,16 +17,11 @@ describe('CrearPrestamoComponent', () => {
   let component: CrearPrestamoComponent;
   let fixture: ComponentFixture<CrearPrestamoComponent>;
   let prestamoService: PrestamoService;
-  //let router : Router;
-  //let location: Location;
 
   const prestamoCrear = new CrearPrestamo("3", 120000, 20, 2, "SEMANAL");
-  const prestamo = new PrestamoRespuesta("2022-06-01", "2022-06-15", 120000.0, 144000.0, 2,"SEMANAL",  "2022-06-08", 72000.0);
+  const prestamo = new PrestamoRespuesta("2022-06-01", "2022-06-15", 120000.0, 144000.0, 2,"SEMANAL",  "2022-06-08");
   const respuestaPrestamo = new Respuesta(prestamo);
-  /* const routes: Routes = [
-    { path: 'prestamo', loadChildren: () => import('@prestamo/prestamo.module').then(mod => mod.PrestamoModule) }
-    
-  ]; */
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ CrearPrestamoComponent ],
@@ -48,8 +42,6 @@ describe('CrearPrestamoComponent', () => {
     fixture = TestBed.createComponent(CrearPrestamoComponent);
     component = fixture.componentInstance;
     prestamoService = TestBed.inject(PrestamoService);
-    //router = TestBed.inject(Router);
-   // location = TestBed.inject(Location);
     spyOn(prestamoService, 'crear').and.returnValue(
       of(respuestaPrestamo)
     );
@@ -66,7 +58,7 @@ describe('CrearPrestamoComponent', () => {
   });
 
   it('deberia crear prestamo', () => {
-    prestamoService.crear(prestamoCrear).subscribe((resp: Respuesta)=> {
+    prestamoService.crear(prestamoCrear).subscribe((resp: Respuesta<PrestamoRespuesta>)=> {
       expect(resp.valor).toBe(prestamo);
     });
   });

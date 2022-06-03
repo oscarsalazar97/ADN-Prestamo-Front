@@ -1,5 +1,6 @@
 <h1>Registrar préstamo</h1>
-<form [formGroup]= "prestamoForm" (ngSubmit)="crear()">
+<div>
+  <form [formGroup]= "prestamoForm" (ngSubmit)="crear()">
     <div class="row">
       <div class="col-4">
         <div class="mb-3">
@@ -21,7 +22,7 @@
     <div class="row">
       <div class="col-4">
         <label class="form-label">Forma de pago</label>
-        <select validar formControlName="formaPago" id="formaPago" name="formaPago" class="form-select-sm">
+        <select validar formControlName="formaPago" id="formaPago" name="formaPago" class="form-select">
           <option value="SEMANAL">Semanal</option>
           <option value="QUINCENAL">Quincenal</option>
         </select>
@@ -29,7 +30,7 @@
 
       <div class="col-5">
         <label class="form-label">Cantidad cuotas</label>
-        <select validar formControlName="cantidadCuotas" id="cantidadCuotas" name="cantidadCuotas" class="form-select-sm">
+        <select validar formControlName="cantidadCuotas" id="cantidadCuotas" name="cantidadCuotas" class="form-select">
           <option value="2">2 cuotas</option>
           <option value="3">3 cuotas</option>
           <option value="4">4 cuotas</option>
@@ -48,6 +49,8 @@
       </div>
     </div>
     
-   
-    <button [disabled]="prestamoForm.invalid" type="submit" class="btn btn-primary">Submit</button>
+   <div class="row">
+    <button [disabled]="prestamoForm.invalid" type="submit" class="btn btn-primary">Crear</button>
+   </div>
   </form>
+</div>
