@@ -28,7 +28,7 @@ export class CrearPrestamoComponent implements OnInit {
   }
 
   crear() {
-    this.prestamoService.crear(this.prestamoForm.value).subscribe((resp: Respuesta<PrestamoRespuesta>)=> {
+    /* this.prestamoService.crear(this.prestamoForm.value).subscribe((resp: Respuesta<PrestamoRespuesta>)=> {
       this.prestamoRespuesta = resp.valor;
       this.router.navigate(['/prestamo/listar']);
       prue();
@@ -36,7 +36,19 @@ export class CrearPrestamoComponent implements OnInit {
       console.log(errorO);
       
       error(errorO.error.mensaje);
-    }));
+    })); */
+    this.prestamoService.crear(this.prestamoForm.value).subscribe({
+      
+      next: (resp: Respuesta<PrestamoRespuesta>) => { 
+        this.prestamoRespuesta = resp.valor;
+      this.router.navigate(['/prestamo/listar']);
+      prue();
+       },
+      error: (errorO : any) => {
+        console.log(errorO);
+        error(errorO.error.mensaje)
+      }
+    });
    }
 
   private construirFormularioPrestamo() {
