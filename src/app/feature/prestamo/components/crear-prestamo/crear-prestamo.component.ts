@@ -28,15 +28,6 @@ export class CrearPrestamoComponent implements OnInit {
   }
 
   crear() {
-    /* this.prestamoService.crear(this.prestamoForm.value).subscribe((resp: Respuesta<PrestamoRespuesta>)=> {
-      this.prestamoRespuesta = resp.valor;
-      this.router.navigate(['/prestamo/listar']);
-      prue();
-    }, (errorO => {
-      console.log(errorO);
-      
-      error(errorO.error.mensaje);
-    })); */
     this.prestamoService.crear(this.prestamoForm.value).subscribe({
       
       next: (resp: Respuesta<PrestamoRespuesta>) => { 
